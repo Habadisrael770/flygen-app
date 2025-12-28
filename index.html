@@ -1451,59 +1451,70 @@
       box-shadow: var(--shadow-purple);
     }
 
+    /* CANVA-STYLE CIRCLES - Large like Canva */
     .canva-circles-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 32px;
+      gap: 24px;
+      padding: 24px;
+      max-width: 480px;
+      margin: 0 auto 32px auto;
     }
 
     .canva-circles-grid.small {
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      gap: 20px;
     }
 
     .canva-circle {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
+    }
+
+    .canva-circle:active {
+      transform: scale(0.95);
     }
 
     .canva-circle:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
     }
 
     .canva-circle:hover .circle-icon {
-      transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
     }
 
     .circle-icon {
-      width: 60px;
-      height: 60px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 24px;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 40px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
     .canva-circles-grid.small .circle-icon {
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
+      width: 80px;
+      height: 80px;
+      font-size: 32px;
     }
 
     .canva-circle span {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 500;
-      color: var(--dark-gray);
+      color: #1F1F1F;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 96px;
+      word-wrap: break-word;
     }
 
     .canva-section-title {
@@ -1543,26 +1554,46 @@
       padding-bottom: 120px;
     }
 
+    /* Tablet */
+    @media (max-width: 768px) {
+      .canva-circles-grid {
+        gap: 20px;
+        padding: 20px;
+      }
+      .circle-icon {
+        width: 88px;
+        height: 88px;
+        font-size: 36px;
+      }
+      .canva-circles-grid.small .circle-icon {
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+      }
+    }
+
+    /* Mobile */
     @media (max-width: 480px) {
       .canva-circles-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
+        gap: 16px;
+        padding: 16px;
       }
       .canva-circles-grid.small {
         grid-template-columns: repeat(4, 1fr);
       }
       .circle-icon {
-        width: 52px;
-        height: 52px;
-        font-size: 22px;
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
       }
       .canva-circles-grid.small .circle-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
+        width: 64px;
+        height: 64px;
+        font-size: 26px;
       }
       .canva-circle span {
-        font-size: 10px;
+        font-size: 13px;
       }
       
       /* Fix bottom bar on mobile */
