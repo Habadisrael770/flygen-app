@@ -841,6 +841,11 @@
       z-index: 100;
     }
 
+    /* Hide bottom bar on home page */
+    #page-dashboard.active ~ .bottom-bar {
+      display: none;
+    }
+
     .bottom-bar-right {
       display: flex;
       gap: 12px;
@@ -1429,26 +1434,44 @@
     }
 
     .canva-main-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
+      justify-content: center;
+      gap: 12px;
+      width: calc(96px * 3 + 24px * 2); /* 3 circles + 2 gaps */
+      max-width: 100%;
+      height: 96px; /* Same height as circles */
+      padding: 0 24px;
       background: var(--primary-purple);
       color: white;
       border: none;
-      border-radius: 50px;
-      font-size: 18px;
+      border-radius: 48px; /* Half of height for pill shape */
+      font-size: 20px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
-      margin-bottom: 32px;
+      margin: 0 auto 32px auto;
       font-family: inherit;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
     }
 
     .canva-main-btn:hover {
       background: var(--primary-dark);
-      transform: scale(1.05);
-      box-shadow: var(--shadow-purple);
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+    }
+
+    .canva-main-btn:active {
+      transform: scale(0.98);
+    }
+
+    @media (max-width: 480px) {
+      .canva-main-btn {
+        width: calc(80px * 3 + 16px * 2); /* Mobile: 3 circles + 2 gaps */
+        height: 80px;
+        border-radius: 40px;
+        font-size: 18px;
+      }
     }
 
     /* CANVA-STYLE CIRCLES - Large like Canva */
@@ -2394,19 +2417,13 @@
         
         <!-- Additional Tools Section -->
         <h3 class="canva-section-title">כלים נוספים</h3>
-        <div class="canva-circles-grid small">
+        <div class="canva-circles-grid">
+          <!-- Row 1 -->
           <div class="canva-circle" onclick="alert('ניהול מוצרים - בקרוב!')">
             <div class="circle-icon" style="background: linear-gradient(135deg, #06B6D4, #22D3EE);">
               <i class="ri-shopping-bag-line"></i>
             </div>
             <span>מוצרים</span>
-          </div>
-          
-          <div class="canva-circle" onclick="openModal('share-modal')">
-            <div class="circle-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
-              <i class="ri-share-line"></i>
-            </div>
-            <span>שתף</span>
           </div>
           
           <div class="canva-circle" onclick="alert('הפליירים שלי - בקרוב!')">
@@ -2416,14 +2433,14 @@
             <span>הפליירים שלי</span>
           </div>
           
-          <div class="canva-circle" onclick="alert('דשבורד - בקרוב!')">
-            <div class="circle-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">
-              <i class="ri-dashboard-line"></i>
+          <div class="canva-circle" onclick="alert('📢 קמפיינים - בפיתוח!')">
+            <div class="circle-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);">
+              <i class="ri-megaphone-line"></i>
             </div>
-            <span>דשבורד</span>
+            <span>קמפיינים</span>
           </div>
           
-          <!-- New Features - v9 -->
+          <!-- Row 2 -->
           <div class="canva-circle" onclick="navigateTo('page-data')">
             <div class="circle-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
               <i class="ri-table-line"></i>
@@ -2436,13 +2453,6 @@
               <i class="ri-image-add-line"></i>
             </div>
             <span>העלאת תמונות</span>
-          </div>
-          
-          <div class="canva-circle" onclick="alert('📢 פרסומות - בפיתוח!')">
-            <div class="circle-icon" style="background: linear-gradient(135deg, #14B8A6, #0F766E);">
-              <i class="ri-advertisement-line"></i>
-            </div>
-            <span>פרסומות</span>
           </div>
           
           <div class="canva-circle" onclick="openCategoryFlyer()">
@@ -2977,7 +2987,7 @@
   <!-- ========================================
        BOTTOM BAR
        ======================================== -->
-  <div class="bottom-bar">
+  <div class="bottom-bar" id="main-bottom-bar">
     <button class="btn btn-text" onclick="saveDraft()">
       <i class="ri-save-line"></i> שמור טיוטה
     </button>
@@ -3288,6 +3298,12 @@
       });
       document.getElementById(pageId).classList.add('active');
       window.scrollTo(0, 0);
+      
+      // Hide bottom bar on home page
+      const bottomBar = document.getElementById('main-bottom-bar');
+      if (bottomBar) {
+        bottomBar.style.display = (pageId === 'page-dashboard') ? 'none' : 'flex';
+      }
     }
 
     // ========================================
@@ -4377,6 +4393,12 @@
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
       initLanguage();
+      
+      // Hide bottom bar on home page on initial load
+      const bottomBar = document.getElementById('main-bottom-bar');
+      if (bottomBar && document.getElementById('page-dashboard').classList.contains('active')) {
+        bottomBar.style.display = 'none';
+      }
     });
   </script>
 
