@@ -5061,46 +5061,7 @@
       }, 500);
     }
     
-    // ========================================
-    // V9 - Flyer Type Selection
-    // ========================================
-    function selectTypeAndGo(type) {
-      console.log('Selected flyer type:', type);
-      
-      // Map types to actions
-      const typeActions = {
-        'a4': () => {
-          sessionStorage.setItem('flyerType', 'a4');
-          navigateTo('page-data');
-        },
-        'social': () => {
-          alert('🎨 פוסט סושיאל\n\nתכונה בפיתוח!\nבקרוב תוכל ליצור פוסטים לאינסטגרם ופייסבוק בקליק.');
-        },
-        'coupon': () => {
-          alert('🎫 קופונים\n\nתכונה בפיתוח!\nבקרוב תוכל ליצור קופוני הנחה מעוצבים.');
-        },
-        'shelf': () => {
-          alert('📊 פסי מדף\n\nתכונה בפיתוח!\nבקרוב תוכל ליצור פסי מדף למוצרים.');
-        },
-        'sheet': () => {
-          // For now, go to same page
-          sessionStorage.setItem('flyerType', 'sheet');
-          navigateTo('page-data');
-        },
-        'upload-images': () => {
-          alert('📸 העלאת תמונות\n\nתכונה בפיתוח!\nבקרוב תוכל להעלות תמונות מוצרים ולארגן אותם בפלייר.');
-        },
-        'ads': () => {
-          alert('📢 פרסומות\n\nתכונה בפיתוח!\nבקרוב תוכל ליצור פוסטרים פרסומיים מקצועיים.');
-        }
-      };
-      
-      if (typeActions[type]) {
-        typeActions[type]();
-      } else {
-        navigateTo('page-select');
-      }
-    }
+    // V9 - Flyer Type Selection (removed duplicate)
 
 
 
